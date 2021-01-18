@@ -1,0 +1,16 @@
+def primes(to_number):
+  pass
+
+
+def primes(to_number):
+  result = list()
+  for n in range(2,to_number+1):
+    for x in range(2,n+1):
+      if (n % x == 0)and(x!=n):
+        break
+      elif (x==n):
+        result.append(n)
+  return result
+
+print(primes(1000))
+#assert primes(5) == [2, 3, 5]
