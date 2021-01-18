@@ -1,0 +1,19 @@
+# zadanie 3
+
+names = {
+    1: 'Mateusz',
+    2: 'Marcin',
+    3: 'Wojciech',
+    4: 'Marcin',
+    5: 'Michał',
+    6: 'Antoni',
+    7: 'Katarzyna',
+    8: 'Agata',
+}
+
+
+result = dict()
+for x in range(len(names)):
+  result[names[x+1]] = x+1
+
+assert 'Mateusz' in result
