@@ -1,0 +1,12 @@
+import itertools
+U = {'👻', '🕵', '🔺', '🐉', '🐍', '🦂', '🔥', '🌻', '🐙', '🌌'}
+
+temp = frozenset(U)
+result = {temp}
+
+for i in range(len(U)):
+  temp = set(itertools.combinations(U, i))
+  for j in temp:
+    result.add(frozenset(set(j)))
+
+assert frozenset(('👻', '🕵', '🔺', '🐉', '🐍', '🦂', '🔥', '🌻', '🐙', '🌌')) in result
