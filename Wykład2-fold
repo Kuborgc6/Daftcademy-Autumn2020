@@ -1,0 +1,22 @@
+def fold(a, b):
+  c = list()
+  if (a==None)and(b==None):
+    return c
+  elif (a==None):
+    for x in range(len(b)):
+      c.append(0)
+  elif (b==None):
+    for x in range(len(a)):
+      c.append(0)
+  else:
+    l = max(len(a),len(b))
+    for x in range(l):
+      if x < min(len(a),len(b)):
+        c.append(a[x]*b[x])
+      else:
+        c.append(0)
+  return c
+
+assert fold([1, 2, 3], [1, 2, 3]) == [1, 4, 9]
+assert fold([1, 2, 3], None) == [0, 0, 0]
+assert fold([1, 2, 3], []) == [0, 0, 0]
