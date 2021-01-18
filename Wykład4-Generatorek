@@ -1,0 +1,27 @@
+import math
+
+
+def infinite_sequence():
+  while(1):
+    i = 0
+    result = list()
+    result.apend(i)
+    yield i
+    i += 1
+     
+
+def is_palindrome(n):
+  temp = n
+  temp_str = str(temp)
+  temp_map = map(int, temp_str)
+  temp_list = list(temp_map)
+  temp_len = len(temp_list)
+  for i in range (math.floor(temp_len/2)):
+    if temp_list[i] != temp_list[-(1+i)]:
+      return False
+  return True
+
+print(is_palindrome(151))
+print(is_palindrome(1512))
+print(is_palindrome(15221))
+print(is_palindrome(1221))
