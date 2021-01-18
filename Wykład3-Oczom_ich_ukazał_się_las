@@ -1,0 +1,92 @@
+class MyPolynomial:
+  def __init__(self, *arg):
+    self.__shadow = 'nie ma mnie'
+    self.polynomial = list()
+    if len(arg) == 0:
+      self.polynomial.append(0)
+    else:
+      for x in range (len(arg)):
+        self.polynomial.append(arg[x])
+      
+  def __str__ (self):
+    result = str(self.polynomial[0])
+    if len(self.polynomial) > 1:
+      for x in range(1,len(self.polynomial)):
+        if (self.polynomial[x] != 0):
+          result = result + ' + ' + str(self.polynomial[x]) + 'x^'+str(x)
+    return(result)
+
+  def __eq__(self, other):
+    return str(self) == other
+    
+  def __repr__(self):
+    if len(self.polynomial) > 0:
+      result = 'MyPolynomial(' + str(self.polynomial[0]) 
+      if len(self.polynomial) > 1:
+        for x in range(1,len(self.polynomial)):
+          if not((self.polynomial[x] == self.polynomial[x-1]) and (self.polynomial[x] == 0)):
+            result =  result + ', ' + str(self.polynomial[x])
+    else:
+      result = 'MyPolynomial(0'
+    result = result + ')'
+    return(result)
+    
+  def degree(self):
+    v_degree = len(self.polynomial)-1
+    for x in reversed(range(v_degree)):
+      if self.polynomial[x+1] != 0:
+        return v_degree
+      else:
+        v_degree = v_degree-1
+    return v_degree
+      
+  @classmethod
+  def from_iterable(cls, *arg):
+    print('type(arg):', type(arg[0]))
+    print(arg[0])
+    result = cls(*arg[0])
+    print('result:',type( result))
+    print(result)
+    return result 
+  
+  def __add__(self, other):
+    result = list()
+    if self.degree() == other.degree():
+      for i in range (len(self.polynomial)):
+        result.append(self.polynomial[i]+other.polynomial[i])
+    elif  self.degree() > other.degree():
+      for i in range (len(other.polynomial)):
+        result.append(self.polynomial[i]+other.polynomial[i])
+      for i in range (len(other.polynomial),len(self.polynomial)):
+        result.append(self.polynomial[i])
+    else:
+      for i in range (len(self.polynomial)):
+        result.append(self.polynomial[i]+other.polynomial[i])
+      for i in range (len(self.polynomial),len(other.polynomial)):
+        result.append(other.polynomial[i])
+    return MyPolynomial(*result)
+    
+  def __iadd__(self, other):
+    if self.degree() == other.degree():
+      for i in range (len(self.polynomial)):
+        self.polynomial[i] = (self.polynomial[i]+other.polynomial[i])
+    elif  self.degree() > other.degree():
+      for i in range (len(other.polynomial)):
+        self.polynomial[i] = (self.polynomial[i]+other.polynomial[i])
+    else:
+      for i in range (len(self.polynomial)):
+        self.polynomial[i] = (self.polynomial[i]+other.polynomial[i])
+      for i in range (len(self.polynomial),len(other.polynomial)):
+        self.polynomial.append(other.polynomial[i])
+    return self
+
+
+assert MyPolynomial(5, 8) == MyPolynomial(2, 4) + MyPolynomial(3, 4)
+
+mp1 = MyPolynomial(2, 4)
+mp2 = MyPolynomial(3, 4)
+mp3 = MyPolynomial(5, 8)
+mp1 += mp2
+print(mp1)
+print(mp3)
+assert mp3 == mp1
