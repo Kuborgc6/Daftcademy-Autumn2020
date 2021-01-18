@@ -1,0 +1,27 @@
+class MyPolynomial:
+  def __init__(self, *arg):
+    self.__shadow = 'nie ma mnie'
+    self.polynomial = list()
+    for x in range (len(arg)):
+      self.polynomial.append(arg[x])
+    
+  def __call__(self, x):
+    result = 0
+    for i in range(len(self.polynomial)):
+      print('i:',i)
+      print(self.polynomial)
+      print('self.polynomial[i]:',self.polynomial[i])
+      print('x^i:', (x**i))
+      result = result+self.polynomial[i]*(x**i)
+      print('result:', result)
+    
+    return result
+
+
+w = MyPolynomial(1, 2, 3)
+assert MyPolynomial()
+assert MyPolynomial(1)  # 1
+assert MyPolynomial(1, 2)  # 1 + 2x
+assert MyPolynomial(1, 2, 3)  # 1 + 2x + 3x^2
+print('w(2):',w(2))
+assert w(2) == 17
