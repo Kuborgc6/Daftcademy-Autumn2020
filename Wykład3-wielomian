@@ -1,0 +1,12 @@
+class MyPolynomial:
+  def __init__(self, *arg):
+    self.__shadow = 'nie ma mnie'
+    for x in range (len(arg)):
+      polynomial = arg[x]
+
+
+
+assert MyPolynomial()  # 0
+assert MyPolynomial(1)  # 1
+assert MyPolynomial(1, 2)  # 1 + 2x
+assert MyPolynomial(1, 2, 3)  # 1 + 2x + 3x^2
