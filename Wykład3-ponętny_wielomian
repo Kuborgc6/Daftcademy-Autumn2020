@@ -1,0 +1,37 @@
+class MyPolynomial:
+  def __init__(self, *arg):
+    self.__shadow = 'nie ma mnie'
+    self.polynomial = list()
+    for x in range (len(arg)):
+      self.polynomial.append(arg[x])
+      
+  def __str__ (self):
+    result = str(self.polynomial[0])
+    if len(self.polynomial) > 1:
+      for x in range(1,len(self.polynomial)):
+        if (self.polynomial[x] != 0):
+          result = result + ' + ' + str(self.polynomial[x]) + 'x^'+str(x)
+    return(result)
+
+  def __eq__(self, other):
+    return str(self) == other
+    
+  def __repr__(self):
+    if len(self.polynomial) > 0:
+      result = 'MyPolynomial(' + str(self.polynomial[0]) 
+      if len(self.polynomial) > 1:
+        for x in range(1,len(self.polynomial)):
+          if not((self.polynomial[x] == self.polynomial[x-1]) and (self.polynomial[x] == 0)):
+            result =  result + ', ' + str(self.polynomial[x])
+    else:
+      result = 'MyPolynomial(0'
+    result = result + ')'
+    return(result)
+
+print(repr(MyPolynomial()))
+print('MyPolynomial(1, 2)')
+print(str(MyPolynomial(0)))
+assert '1 + 2x^1' == str(MyPolynomial(1, 2))
+assert '1 + 1x^1 + 2x^2' == str(MyPolynomial(1, 1, 2))
+assert '1 + 2x^2' == str(MyPolynomial(1, 0, 2))
+assert 'MyPolynomial(1, 2)' == repr(MyPolynomial(1, 2))
